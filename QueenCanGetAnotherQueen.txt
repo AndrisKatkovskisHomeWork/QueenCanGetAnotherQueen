@@ -1,0 +1,71 @@
+public class MainForPlay {
+
+    static int[][] field =
+            {{1, 0, 1, 0, 1, 0, 1, 0},
+                    {0, 1, 0, 1, 0, 1, 0, 1},
+                    {1, 0, 1, 0, 1, 0, 1, 0},
+                    {0, 1, 0, 1, 0, 1, 0, 1},
+                    {1, 0, 1, 0, 1, 0, 1, 0},
+                    {0, 1, 0, 1, 0, 1, 0, 1},
+                    {1, 0, 1, 0, 1, 0, 1, 0},
+                    {0, 1, 0, 1, 0, 1, 0, 1}};
+
+    static int whiteQeenRow = 6;
+    static int whiteQeenColumn = 6;
+
+    static int blackQeenRow = 1;
+    static int blackQueenColumn = 0;
+
+    public static void main(String[] args) {
+
+        QueenCanGetAnotherQueen();
+    }
+
+    public static void QueenCanGetAnotherQueen() {
+
+        printChessBoard();
+
+        System.out.println("White queen \u2655 is on index: " + whiteQeenRow + ", " + whiteQeenColumn);
+        System.out.println("Black queen \u265B is on index: " + blackQeenRow + ", " + blackQueenColumn);
+        System.out.println();
+
+        queenFinder();
+
+    }
+
+    public static void printChessBoard() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (field[i][j] == 0)
+                    System.out.print((char) 27 + "[40m" + " ");
+                else
+                    System.out.print((char) 27 + "[47m" + " ");
+            }
+            System.out.println((char) 27 + "[50m" + " ");
+        }
+    }
+
+    public static void queenFinder() {
+        for (int i = 1; i < field.length; i++) {
+            if ((whiteQeenRow + i) == blackQeenRow && (whiteQeenColumn + i == blackQueenColumn)) {
+                System.out.println("Queens is on DIAGONAL (1)");
+                break;
+            } else if ((whiteQeenRow + i) == blackQeenRow && (whiteQeenColumn - i == blackQueenColumn)) {
+                System.out.println("Queens is on DIAGONAL (2)");
+                break;
+            } else if ((whiteQeenRow - i) == blackQeenRow && (whiteQeenColumn + i == blackQueenColumn)) {
+                System.out.println("Queens is on DIAGONAL (3)");
+                break;
+            } else if ((whiteQeenRow - i) == blackQeenRow && (whiteQeenColumn - i == blackQueenColumn)) {
+                System.out.println("Queens is on DIAGONAL (4). The queens are " + (i) + " squares far away.");
+                break;
+            } else if (whiteQeenRow == blackQeenRow) {
+                System.out.println("The queens are in one row");
+            } else if (whiteQeenColumn == blackQueenColumn) {
+                System.out.println("The queens are in one column");
+            } else {
+                System.out.println("Search radius: " + (i) + " fields away. No other queen found!");
+            }
+        }
+    }
+}
